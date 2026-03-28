@@ -11,7 +11,7 @@ const NAV_ITEMS = [
         label: "Video Courses",
         desc: "Host, sell & protect your course content",
         icon: (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="3" width="20" height="14" rx="2" /><polyline points="8 21 12 17 16 21" /><line x1="12" y1="17" x2="12" y2="3" />
           </svg>
         ),
@@ -21,7 +21,7 @@ const NAV_ITEMS = [
         label: "Live Classes",
         desc: "Stream live, auto-save to your library",
         icon: (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="2" /><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14" />
           </svg>
         ),
@@ -32,7 +32,7 @@ const NAV_ITEMS = [
         label: "Your Website",
         desc: "Custom domain storefront, zero code",
         icon: (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
           </svg>
         ),
@@ -42,7 +42,7 @@ const NAV_ITEMS = [
         label: "AI Features",
         desc: "Transcription, quizzes & course assistant",
         icon: (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 2a10 10 0 1 0 10 10" /><path d="M12 6v6l4 2" /><path d="M22 6l-3-3-3 3" /><path d="M19 3v6" />
           </svg>
         ),
@@ -58,7 +58,7 @@ const NAV_ITEMS = [
         label: "Solo Teachers",
         desc: "Your brand, your students, your price",
         icon: (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
           </svg>
         ),
@@ -68,7 +68,7 @@ const NAV_ITEMS = [
         label: "Coaching Institutes",
         desc: "White-label platform for 100+ students",
         icon: (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
         ),
@@ -80,11 +80,25 @@ const NAV_ITEMS = [
   { label: "Blog", href: "#blog" },
 ];
 
-// ─── Logo Text Only ──────────────────────────────────────────────────────────
+// ─── Image Logo Component ────────────────────────────────────────────────────
 function Logo() {
   return (
-    <a href="/" className="navbar-logo" aria-label="StackConnect">
-      <span className="navbar-logo-text">StackConnect</span>
+    <a href="/" className="navbar-logo" aria-label="StackConnect Home">
+      {/* Replace the src below with your actual logo path (e.g., "/logo.png" or "/logo.svg") 
+        Place your image file in the 'public' folder of your Next.js project.
+      */}
+      <img 
+        src="/logo.png" 
+        alt="StackConnect" 
+        className="navbar-logo-img"
+        onError={(e) => {
+          // Fallback just in case the image hasn't been uploaded yet
+          e.target.style.display = 'none';
+          e.target.nextSibling.style.display = 'block';
+        }}
+      />
+      {/* Temporary fallback text hidden by default */}
+      <span className="logo-fallback" style={{ display: 'none' }}>StackConnect</span>
     </a>
   );
 }
@@ -103,7 +117,7 @@ function Chevron({ open }) {
       strokeLinejoin="round"
       style={{
         transform: open ? "rotate(180deg)" : "rotate(0deg)",
-        transition: "transform 0.2s ease-in-out",
+        transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
         flexShrink: 0,
       }}
     >
@@ -201,7 +215,7 @@ export default function Navbar() {
   const timerRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -217,19 +231,17 @@ export default function Navbar() {
   };
 
   const handleMouseLeave = () => {
-    timerRef.current = setTimeout(() => setOpenDropdown(null), 120);
+    timerRef.current = setTimeout(() => setOpenDropdown(null), 150);
   };
 
   return (
     <>
-      {/* ── Scoped styles using your premium variables ────────────────── */}
       <style>{`
         :root {
-          --nav-h: 72px;
+          --nav-h: 80px;
           --font-sans: 'Instrument Sans', system-ui, sans-serif;
           --font-display: 'Playfair Display', Georgia, serif;
           
-          /* Pulling directly from your Tallow palette logic */
           --bg-light: #FAF9F5; 
           --text-main: #2B2822; 
           --text-muted: #625C53;
@@ -247,9 +259,17 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           background: var(--bg-light);
+          border-bottom: 2px solid transparent;
+          transition: all 0.3s ease;
         }
+        
+        /* The Glassmorphism Scroll State */
         .navbar--scrolled {
-          background: #FDFCFA;
+          background: rgba(250, 249, 245, 0.85);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-bottom: 2px solid var(--text-main);
+          box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
 
         .navbar-inner {
@@ -261,17 +281,26 @@ export default function Navbar() {
           align-items: center;
         }
 
-        /* ════════════════ LOGO ════════════════ */
+        /* ════════════════ IMAGE LOGO ════════════════ */
         .navbar-logo {
           text-decoration: none;
           margin-right: 48px;
           flex-shrink: 0;
+          display: flex;
+          align-items: center;
         }
-        .navbar-logo-text {
+        
+        .navbar-logo-img {
+          height: 32px; /* Adjust this to make your logo bigger/smaller */
+          width: auto;
+          display: block;
+          object-fit: contain;
+        }
+
+        .logo-fallback {
           font-family: var(--font-display);
-          font-size: 1.4rem;
-          font-weight: 600;
-          letter-spacing: -0.02em;
+          font-size: 1.5rem;
+          font-weight: 700;
           color: var(--text-main);
         }
 
@@ -279,7 +308,7 @@ export default function Navbar() {
         .navbar-links {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 8px;
           flex: 1;
         }
         .nav-item-wrapper {
@@ -289,17 +318,17 @@ export default function Navbar() {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          padding: 8px 16px;
-          border-radius: 8px;
+          padding: 10px 16px;
+          border-radius: 12px;
           font-family: var(--font-sans);
-          font-size: 0.95rem;
+          font-size: 1rem;
           font-weight: 600;
           color: var(--text-muted);
           background: transparent;
           border: 2px solid transparent;
           cursor: pointer;
           text-decoration: none;
-          transition: all 0.1s ease;
+          transition: all 0.2s ease;
         }
         .nav-link:hover,
         .nav-link--active {
@@ -308,22 +337,22 @@ export default function Navbar() {
           border: 2px solid var(--border-color);
         }
 
-        /* ════════════════ DROPDOWN PANEL (3D Solid Shadow) ════════════════ */
+        /* ════════════════ DROPDOWN PANEL (Spring Animation) ════════════════ */
         .dropdown-panel {
           position: absolute;
-          top: calc(100% + 12px);
+          top: calc(100% + 16px);
           left: 50%;
-          transform: translateX(-50%) translateY(-10px);
-          min-width: 320px;
-          background: #FDFCFA;
+          min-width: 340px;
+          background: #FFFFFF;
           border: 2px solid var(--text-main);
-          border-radius: 12px;
-          /* CRISP 3D SHADOW INSTEAD OF BLUR */
-          box-shadow: 4px 4px 0px var(--text-main);
-          padding: 8px;
+          border-radius: 16px;
+          box-shadow: 6px 6px 0px var(--text-main);
+          padding: 12px;
           opacity: 0;
           pointer-events: none;
-          transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+          /* The Spring Easing */
+          transform: translateX(-50%) translateY(-15px);
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 0.3s ease;
           z-index: 300;
         }
         .dropdown-panel--open {
@@ -339,33 +368,35 @@ export default function Navbar() {
         .dropdown-item {
           display: flex;
           align-items: flex-start;
-          gap: 12px;
+          gap: 16px;
           padding: 12px;
-          border-radius: 8px;
+          border-radius: 12px;
           border: 2px solid transparent;
           text-decoration: none;
-          transition: all 0.1s;
+          transition: all 0.15s;
         }
         .dropdown-item:hover {
-          background: #EDE9E1;
+          background: #FAF9F5;
           border: 2px solid var(--text-main);
         }
         .dropdown-item-icon {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 38px;
-          height: 38px;
-          border-radius: 8px;
-          background: #FDFCFA;
+          width: 42px;
+          height: 42px;
+          border-radius: 10px;
+          background: var(--bone-100);
           border: 2px solid var(--border-color);
           color: var(--text-main);
           flex-shrink: 0;
+          transition: all 0.2s ease;
         }
         .dropdown-item:hover .dropdown-item-icon {
           background: var(--accent);
           color: #FFF;
           border-color: var(--accent-dark);
+          transform: scale(1.05) rotate(-5deg);
         }
         .dropdown-item-body {
           display: flex;
@@ -374,8 +405,8 @@ export default function Navbar() {
         }
         .dropdown-item-label {
           font-family: var(--font-sans);
-          font-size: 0.95rem;
-          font-weight: 700;
+          font-size: 1rem;
+          font-weight: 800;
           color: var(--text-main);
           display: flex;
           align-items: center;
@@ -383,7 +414,7 @@ export default function Navbar() {
         }
         .dropdown-item-desc {
           font-family: var(--font-sans);
-          font-size: 0.85rem;
+          font-size: 0.9rem;
           color: var(--text-muted);
           line-height: 1.4;
         }
@@ -393,7 +424,7 @@ export default function Navbar() {
           padding: 2px 8px;
           border-radius: 6px;
           font-size: 0.65rem;
-          font-weight: 700;
+          font-weight: 800;
           text-transform: uppercase;
           border: 2px solid;
         }
@@ -412,95 +443,95 @@ export default function Navbar() {
         .navbar-cta {
           display: flex;
           align-items: center;
-          gap: 16px;
+          gap: 20px;
           margin-left: auto;
           flex-shrink: 0;
         }
         .cta-signin {
           font-family: var(--font-sans);
-          font-size: 0.95rem;
-          font-weight: 700;
+          font-size: 1rem;
+          font-weight: 800;
           color: var(--text-main);
           text-decoration: none;
           padding: 8px 12px;
+          transition: color 0.2s;
         }
         .cta-signin:hover {
           color: var(--accent);
         }
         
+        /* Upgraded Chunky Button */
         .cta-start {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          padding: 10px 20px;
-          border-radius: 8px;
+          padding: 12px 24px;
+          border-radius: 12px;
           font-family: var(--font-sans);
-          font-size: 0.95rem;
-          font-weight: 700;
+          font-size: 1rem;
+          font-weight: 800;
           color: #FFF;
           background: var(--accent);
-          border: 2px solid var(--accent-dark);
-          /* SOLID 3D PRESS SHADOW */
-          box-shadow: 3px 3px 0px var(--accent-dark);
+          border: 2.5px solid var(--text-main);
+          box-shadow: 4px 4px 0px var(--text-main);
           text-decoration: none;
           cursor: pointer;
           transform: translate(0px, 0px);
           transition: transform 0.1s, box-shadow 0.1s;
         }
         .cta-start:hover {
-          transform: translate(-1px, -1px);
-          box-shadow: 4px 4px 0px var(--accent-dark);
+          transform: translate(-2px, -2px);
+          box-shadow: 6px 6px 0px var(--text-main);
         }
         .cta-start:active {
-          transform: translate(3px, 3px);
-          box-shadow: 0px 0px 0px var(--accent-dark);
+          transform: translate(4px, 4px);
+          box-shadow: 0px 0px 0px var(--text-main);
         }
 
-        /* ════════════════ HAMBURGER (Fixed to Right) ════════════════ */
+        /* ════════════════ HAMBURGER ════════════════ */
         .hamburger {
           display: none;
           flex-direction: column;
           justify-content: center;
           align-items: center;
           gap: 5px;
-          width: 48px;
-          height: 48px;
-          border-radius: 8px;
-          border: 2px solid var(--text-main);
-          background: #FDFCFA;
-          /* Push to far right on mobile */
+          width: 52px;
+          height: 52px;
+          border-radius: 12px;
+          border: 2.5px solid var(--text-main);
+          background: #FFFFFF;
           margin-left: auto;
-          /* 3D solid effect */
-          box-shadow: 3px 3px 0px var(--text-main);
+          box-shadow: 4px 4px 0px var(--text-main);
           cursor: pointer;
           flex-shrink: 0;
           transform: translate(0px, 0px);
           transition: transform 0.1s, box-shadow 0.1s;
         }
         .hamburger:active {
-          transform: translate(3px, 3px);
+          transform: translate(4px, 4px);
           box-shadow: 0px 0px 0px var(--text-main);
         }
         .hamburger-bar {
-          width: 22px;
-          height: 2px;
+          width: 24px;
+          height: 2.5px;
           background: var(--text-main);
           transition: all 0.2s ease-in-out;
           transform-origin: center;
         }
-        .hamburger--open .hamburger-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger--open .hamburger-bar:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
         .hamburger--open .hamburger-bar:nth-child(2) { opacity: 0; }
-        .hamburger--open .hamburger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .hamburger--open .hamburger-bar:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
         /* ════════════════ MOBILE DRAWER ════════════════ */
         .mobile-overlay {
           position: fixed;
           inset: 0;
           z-index: 190;
-          background: rgba(20, 18, 16, 0.6);
+          background: rgba(43, 40, 34, 0.7);
+          backdrop-filter: blur(4px);
           opacity: 0;
           pointer-events: none;
-          transition: opacity 0.2s;
+          transition: opacity 0.3s ease;
         }
         .mobile-overlay--open {
           opacity: 1;
@@ -510,13 +541,14 @@ export default function Navbar() {
           position: fixed;
           top: 0; right: 0; bottom: 0;
           z-index: 195;
-          width: min(340px, 85vw);
-          background: #FDFCFA;
-          border-left: 2px solid var(--text-main);
+          width: min(360px, 85vw);
+          background: var(--bg-light);
+          border-left: 2.5px solid var(--text-main);
+          box-shadow: -8px 0 24px rgba(0,0,0,0.1);
           display: flex;
           flex-direction: column;
           transform: translateX(100%);
-          transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+          transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
           overflow: hidden;
         }
         .mobile-drawer--open {
@@ -529,34 +561,35 @@ export default function Navbar() {
           justify-content: space-between;
           padding: 0 1.5rem;
           height: var(--nav-h);
-          border-bottom: 2px solid var(--text-main);
+          border-bottom: 2.5px solid var(--text-main);
+          background: #FFFFFF;
         }
         .mob-close {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 40px;
-          height: 40px;
-          border-radius: 8px;
-          border: 2px solid var(--text-main);
-          background: #FDFCFA;
-          box-shadow: 2px 2px 0px var(--text-main);
+          width: 44px;
+          height: 44px;
+          border-radius: 10px;
+          border: 2.5px solid var(--text-main);
+          background: #FFFFFF;
+          box-shadow: 3px 3px 0px var(--text-main);
           cursor: pointer;
           color: var(--text-main);
           transition: transform 0.1s, box-shadow 0.1s;
         }
         .mob-close:active {
-          transform: translate(2px, 2px);
+          transform: translate(3px, 3px);
           box-shadow: 0px 0px 0px var(--text-main);
         }
 
         .mob-body {
           flex: 1;
           overflow-y: auto;
-          padding: 1rem;
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 12px;
         }
 
         .mob-trigger {
@@ -564,24 +597,29 @@ export default function Navbar() {
           align-items: center;
           justify-content: space-between;
           width: 100%;
-          padding: 14px 16px;
-          border-radius: 8px;
-          border: 2px solid transparent;
-          background: #EDE9E1;
+          padding: 16px 20px;
+          border-radius: 12px;
+          border: 2px solid var(--border-color);
+          background: #FFFFFF;
           font-family: var(--font-sans);
-          font-size: 1rem;
-          font-weight: 700;
+          font-size: 1.05rem;
+          font-weight: 800;
           color: var(--text-main);
           cursor: pointer;
           text-align: left;
+          transition: all 0.2s;
         }
+        .mob-trigger:active {
+          background: var(--bone-200);
+        }
+        
         .mob-children {
           display: none;
           flex-direction: column;
-          gap: 6px;
-          padding: 8px 0 12px 12px;
-          border-left: 2px solid var(--border-color);
-          margin-left: 12px;
+          gap: 8px;
+          padding: 12px 0 16px 16px;
+          border-left: 3px solid var(--border-color);
+          margin-left: 16px;
         }
         .mob-children--open { display: flex; }
         
@@ -590,27 +628,27 @@ export default function Navbar() {
           align-items: flex-start;
           gap: 12px;
           padding: 12px;
-          border-radius: 8px;
+          border-radius: 12px;
           border: 2px solid transparent;
           text-decoration: none;
         }
-        .mob-child-link:hover { border-color: var(--text-main); }
+        .mob-child-link:active { background: rgba(0,0,0,0.03); }
         .mob-child-icon {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 32px;
-          height: 32px;
-          border-radius: 6px;
-          background: #FDFCFA;
+          width: 36px;
+          height: 36px;
+          border-radius: 8px;
+          background: #FFFFFF;
           border: 2px solid var(--border-color);
           color: var(--text-main);
           flex-shrink: 0;
         }
         .mob-child-label {
           font-family: var(--font-sans);
-          font-size: 0.95rem;
-          font-weight: 700;
+          font-size: 1rem;
+          font-weight: 800;
           color: var(--text-main);
           display: flex;
           align-items: center;
@@ -618,51 +656,49 @@ export default function Navbar() {
         }
         .mob-child-desc {
           font-family: var(--font-sans);
-          font-size: 0.85rem;
+          font-size: 0.9rem;
           color: var(--text-muted);
         }
 
         .mob-plain-link {
           display: block;
-          padding: 14px 16px;
-          border-radius: 8px;
-          background: #EDE9E1;
+          padding: 16px 20px;
+          border-radius: 12px;
+          background: #FFFFFF;
+          border: 2px solid var(--border-color);
           font-family: var(--font-sans);
-          font-size: 1rem;
-          font-weight: 700;
+          font-size: 1.05rem;
+          font-weight: 800;
           color: var(--text-main);
           text-decoration: none;
-          border: 2px solid transparent;
         }
-        .mob-plain-link:hover { border-color: var(--text-main); }
 
         .mob-footer {
           padding: 1.5rem;
-          border-top: 2px solid var(--text-main);
+          border-top: 2.5px solid var(--text-main);
           display: flex;
           flex-direction: column;
-          gap: 12px;
-          background: #EDE9E1;
+          gap: 16px;
+          background: #FFFFFF;
         }
         
         .mob-signin {
           display: block;
           text-align: center;
-          padding: 12px;
-          border-radius: 8px;
-          border: 2px solid var(--text-main);
-          background: #FDFCFA;
+          padding: 16px;
+          border-radius: 12px;
+          border: 2.5px solid var(--text-main);
+          background: #FFFFFF;
           font-family: var(--font-sans);
-          font-size: 1rem;
-          font-weight: 700;
+          font-size: 1.05rem;
+          font-weight: 800;
           color: var(--text-main);
           text-decoration: none;
-          box-shadow: 3px 3px 0px var(--text-main);
-          transform: translate(0px, 0px);
+          box-shadow: 4px 4px 0px var(--text-main);
           transition: transform 0.1s, box-shadow 0.1s;
         }
         .mob-signin:active {
-          transform: translate(3px, 3px);
+          transform: translate(4px, 4px);
           box-shadow: 0px 0px 0px var(--text-main);
         }
 
@@ -671,22 +707,21 @@ export default function Navbar() {
           align-items: center;
           justify-content: center;
           gap: 8px;
-          padding: 12px;
-          border-radius: 8px;
-          border: 2px solid var(--accent-dark);
+          padding: 16px;
+          border-radius: 12px;
+          border: 2.5px solid var(--text-main);
           background: var(--accent);
           font-family: var(--font-sans);
-          font-size: 1rem;
-          font-weight: 700;
+          font-size: 1.05rem;
+          font-weight: 800;
           color: #FFF;
           text-decoration: none;
-          box-shadow: 3px 3px 0px var(--accent-dark);
-          transform: translate(0px, 0px);
+          box-shadow: 4px 4px 0px var(--text-main);
           transition: transform 0.1s, box-shadow 0.1s;
         }
         .mob-cta:active {
-          transform: translate(3px, 3px);
-          box-shadow: 0px 0px 0px var(--accent-dark);
+          transform: translate(4px, 4px);
+          box-shadow: 0px 0px 0px var(--text-main);
         }
 
         /* ════════════════ RESPONSIVE ════════════════ */
@@ -764,7 +799,7 @@ export default function Navbar() {
             aria-label="Close menu"
             onClick={() => setMobileOpen(false)}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
@@ -799,7 +834,8 @@ export default function Navbar() {
             Sign in
           </a>
           <a href="/signup" className="mob-cta" onClick={() => setMobileOpen(false)}>
-            Get started for free
+            Get started
+            <span aria-hidden="true">→</span>
           </a>
         </div>
       </div>
